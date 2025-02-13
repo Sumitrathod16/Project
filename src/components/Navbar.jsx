@@ -1,5 +1,6 @@
 import './Navbar.css';
 import { TiShoppingCart } from "react-icons/ti";
+import { BsSearch } from "react-icons/bs";
 
 function Navbar(){
     return (
@@ -8,6 +9,10 @@ function Navbar(){
             <TiShoppingCart />
             </div>
             <b>Shopio</b>
+            <input type='text' placeholder='Search Shopio..' id='search-box' />
+            <div className="search-icon">
+            <BsSearch />
+            </div>
         </div>
     );
 }
