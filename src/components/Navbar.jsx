@@ -13,6 +13,10 @@ function Navbar(){
             <div className="search-icon">
             <BsSearch />
             </div>
+            <div className='login'>
+            <a href="/login">Login</a><span></span>
+            <a href="/SignUp">SignUp</a>
+            </div>
         </div>
     );
 }
