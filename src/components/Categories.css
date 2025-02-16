@@ -1,0 +1,25 @@
+.cbox{
+    background-color: white;
+    height: 50px;
+    padding: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    justify-content: center;
+    margin: 0px 20px;
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.cbox:hover{
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.7);
+    transform: scale(1.03);
+}
+
+.cname{
+    background-color: white;
+    padding: 5px;
+    font-weight: bold;
+    color: purple;
+}

@@ -31,7 +31,7 @@ b {
     padding: 5px;
     outline: none;
     border: none;
-    border-radius: 3px 0 0 3px;
+    border-radius: 100px 0 0 100px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
     color: black;
     background-color: white;
@@ -39,17 +39,19 @@ b {
 
 #search-box::placeholder {
     font-size: 16px;
+    padding-left: 10px;
 }
 
 #search-icon{
     background-color: indigo;
     font-size: 30.1px;
-    padding: 5px;
-    width: 45px;
+    padding: 5px; 
+    padding-right: 10px;
+    width: 55px;
     height: 39px;
     text-align: center;
     justify-content: center;
-    border-radius: 0 3px 3px 0;
+    border-radius: 0 100px 100px 0;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
     cursor: pointer;
     color:white;
@@ -79,6 +81,7 @@ b {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: indigo;
 }   
 
 .theme:hover {
@@ -94,8 +97,18 @@ b {
     justify-content: center; 
     align-items: center;
     cursor: pointer;
+    position: relative;
+    color: indigo;
 }
 
 .cart-icon:hover {
     border: 1px solid indigo;
+}
+
+span{
+    top: 0;
+    right: 0        ;
+    color: indigo;
+    font-size: 25px;
+    position: absolute;
 }

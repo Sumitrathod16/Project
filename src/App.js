@@ -5,8 +5,13 @@ import Categories from './components/Categories';
 function App() {
   return (
     <div>
-       <Navbar />
-       <Categories />
+      <Navbar />
+      <div className='category'>
+        <Categories title="All"> </Categories>
+        <Categories title="Mobiles"> </Categories>
+        <Categories title="Laptops"> </Categories>
+        <Categories title="HeadPhones"> </Categories>
+      </div>
     </div>
   );
 }
