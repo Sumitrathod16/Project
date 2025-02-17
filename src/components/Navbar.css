@@ -26,9 +26,11 @@ b {
 }
 #search-box {
     margin-left: 30px;
-    font-size: 25px;
+    font-size: 20px;
     width: 100%;
     padding: 5px;
+    padding-left: 10px;
+
     outline: none;
     border: none;
     border-radius: 100px 0 0 100px;
@@ -39,7 +41,7 @@ b {
 
 #search-box::placeholder {
     font-size: 16px;
-    padding-left: 10px;
+    padding-left: 3px;
 }
 
 #search-icon{
@@ -82,6 +84,7 @@ b {
     justify-content: center;
     align-items: center;
     color: indigo;
+    border: none;
 }   
 
 .theme:hover {
