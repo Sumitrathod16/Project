@@ -12,6 +12,7 @@
     box-sizing: border-box;
     overflow: hidden;
     flex-direction: column;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .card img{
@@ -36,6 +37,21 @@
     font-weight: bold;
     color: indigo;
     font-size: 20px;
+}
+
+#old-price{
+    background-color: white;
+    font-weight: bold;
+    color: gray;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+#discount{
+    background-color: white;
+    color: red;
+    font-size: 25px;
+    margin-bottom: 3px;
 }
 
 #add-to-cart-btn{
