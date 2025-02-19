@@ -55,11 +55,13 @@ function App() {
     return filtercards;
   }
 
+  const [dark, setDark] = useState(false);
+
   return (
     <BrowserRouter>
-      <div>
+      <div className={`app ${dark ? 'dark-app' : ''}`}>
         <div id='navbar'>
-          <Navbar searchQuery={searchQuery} onSearchChange={setSearchQuery} /></div>
+          <Navbar searchQuery={searchQuery} onSearchChange={setSearchQuery} dark={dark} setDark={setDark}/></div>
         <div className='category category1'>
           <Categories title="All" link="/"> </Categories>
           <Categories title="Mobiles" link="/mobiles"> </Categories>

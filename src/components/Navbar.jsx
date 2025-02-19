@@ -4,15 +4,14 @@ import { BsSearch } from "react-icons/bs";
 import { VscColorMode } from "react-icons/vsc";
 import { FiShoppingBag } from "react-icons/fi";
 
-function Navbar({ searchQuery, onSearchChange}) {
+function Navbar({ searchQuery, onSearchChange, dark , setDark}) {
     return (
-        <div className="nav">
+        <div className={`nav ${dark ? 'dark-theme' : ''}`}>
             <div className='nav-icon'>
                 <TiShoppingCart />
             </div>
             <b>Shopio</b>
             <form className='search' onSubmit={(e)=>e.preventDefault()}>
-            {/* <BsSearch id='search-icon'/> */}
                 <input type='text' placeholder='Search Shopio..' id='search-box' value={searchQuery} onChange={(e)=>onSearchChange(e.target.value)}/>
                 <BsSearch id='search-icon'/>
             </form>
@@ -21,7 +20,7 @@ function Navbar({ searchQuery, onSearchChange}) {
                 <a href="/login">Login</a>
                 <a href="/SignUp">SignUp</a>
             </div>
-            <div className='theme'>
+            <div className='theme' onClick={()=>{setDark(true)}}>
                 <VscColorMode />
             </div>
             <div className='cart-icon'>

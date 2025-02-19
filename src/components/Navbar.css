@@ -5,18 +5,19 @@
     align-items: center;
     box-sizing: border-box;
     justify-content: space-evenly;
+    background-color: rgb(219, 218, 218);
+    color: indigo;
 }
 
 .nav-icon {
     font-size: 50px;
-    color: indigo;
+    color: inherit;
 }
 
 b {
     font-size: 50px;
-    color: black;
     padding-bottom: 9px;
-    color:indigo;
+    color:inherit;
 }
 
 .search{
@@ -53,7 +54,7 @@ b {
     text-align: center;
     justify-content: center;
     cursor: pointer;
-    color: indigo;
+    color: inherit;
     position: absolute;
     border-radius: 2px;
 } 
@@ -67,7 +68,7 @@ b {
     text-decoration: none;
     color: black;
     padding: 20px;
-    color:indigo;
+    color:inherit;
 }
 
 .login a:hover {
@@ -82,7 +83,7 @@ b {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: indigo;
+    color: inherit;
     border: none;
 }   
 
@@ -100,7 +101,7 @@ b {
     align-items: center;
     cursor: pointer;
     position: relative;
-    color: indigo;
+    color: inherit;
 }
 
 .cart-icon:hover {
@@ -110,7 +111,18 @@ b {
 span{
     top: 0;
     right: 0        ;
-    color: indigo;
+    color: inherit;
     font-size: 25px;
     position: absolute;
+}
+
+.dark-theme{
+    background-color: black;
+    color: white;
+}
+
+@media (max-width:1250px){
+    .login, .cart-icon, .theme{
+        display: none;
+    }
 }
