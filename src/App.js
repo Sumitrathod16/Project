@@ -42,13 +42,24 @@ import acernitro from './images/acerv.webp';
 import aceralg from './images/aceralg.webp';
 import acerneo from './images/acerneo.webp';
 import acerswift from './images/acerswift.webp';
+import React, { useState } from 'react';
 
 function App() {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  function FilterCard({ children }) {
+    if (!searchQuery) return children;
+    const filtercards = React.Children.toArray(children).filter(card =>
+      card.props.pname.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    return filtercards;
+  }
+
   return (
     <BrowserRouter>
       <div>
         <div id='navbar'>
-        <Navbar /></div>
+          <Navbar searchQuery={searchQuery} onSearchChange={setSearchQuery} /></div>
         <div className='category category1'>
           <Categories title="All" link="/"> </Categories>
           <Categories title="Mobiles" link="/mobiles"> </Categories>
@@ -59,42 +70,44 @@ function App() {
         <Routes>
           <Route path='/' element={
             <div className='card-container'>
-              <Card img={iphone15} pname="Iphone15" discount="-23%" pprice="Rs. 61499/-" oldp="79000"></Card>
-              <Card img={lenovothink} pname="Lenovo ThinkPad" pprice="Rs. 17538/-" discount="-65%" oldp="49999"></Card>
-              <Card img={jbl} pname="JBL Tune 510BT" pprice="Rs. 2799/-" discount="-37%" oldp="4449"></Card>
-              <Card img={dell3530} pname="Dell Inspiron 3530" pprice="Rs. 57490/-" discount="-21%" oldp="72598"></Card>
-              <Card img={redmi13} pname="Redmi 13 5G" pprice="Rs. 11973/-" discount="-33%" oldp="17999"></Card>
-              <Card img={dell5630} pname="Dell Insprion 5630" pprice="Rs. 64490/-" discount="-29%" oldp="90999"></Card>
-              <Card img={sgs23ul} pname="Samsung S23 Ultra" pprice="Rs. 71999/-" discount="-52%" oldp="149999"></Card>
-              <Card img={lenovov14} pname="Lenovo V14" pprice="Rs. 37168/-" discount="-26%" oldp="49990"></Card>
-              <Card img={redminote13} pname="Redmi Note 13 Pro" pprice="Rs. 18488/-" discount="-40%" oldp="30999"></Card>
-              <Card img={acernitro} pname="Acer Nitro V" pprice="Rs. 78999/-" discount="-24%" oldp="103999"></Card>
-              <Card img={boultx} pname="Boult X Mustang" pprice="Rs. 2499/-" discount="-64%" oldp="6999"></Card>
-              <Card img={hp15} pname="HP 15" pprice="Rs. 54990/-" discount="-23%" oldp="71773"></Card>
-              <Card img={iphone16} pname="Iphone16" discount="-9%" pprice="Rs. 72900/-" oldp="79000"></Card>
-              <Card img={dell3440} pname="Dell latitude 3440" pprice="Rs. 29990/-" discount="-27%" oldp="40999"></Card>
-              <Card img={aceralg} pname="Acer ALG" pprice="Rs. 61990/-" discount="-33%" oldp="92999"></Card>
-              <Card img={boultq} pname="Boult Q headphone" pprice="Rs. 1999/-" discount="-67%" oldp="5999"></Card>
-              <Card img={acerneo} pname="Acer Predator helios neo 16" pprice="Rs. 143999/-" discount="-9%" oldp="157999"></Card>
-              <Card img={sga23} pname="Samsung Galaxy A23" pprice="Rs. 28999/-" discount="-22%" oldp="36999"></Card>
-              <Card img={acerswift} pname="Acer Swift 9014" pprice="Rs. 51990/-" discount="-13%" oldp="59999"></Card>
-              <Card img={sgs25} pname="Samsung S25 5G" pprice="Rs. 80999/-"></Card>
-              <Card img={lenovoslim3} pname="Lenovo IdeaPad Slim 3" pprice="Rs. 64490/-" discount="-26%" oldp="86890"></Card>
-              <Card img={iphone13} pname="Iphone13" discount="-25%" pprice="Rs. 52499/-" oldp="69900"></Card>
-              <Card img={hp14} pname="HP Pavilion 14" pprice="Rs. 75990/-" discount="-22%" oldp="97867"></Card>
-              <Card img={iphone16max} pname="Iphone16 Pro Max" discount="-4%" pprice="Rs. 177900/-" oldp="184900"></Card>
-              <Card img={lenovoloq} pname="Lenovo LOQ" pprice="Rs. 65490/-" discount="-21%" oldp="82690"></Card>
-              <Card img={dellg15} pname="Dell G15" pprice="Rs. 78990/-" discount="-26%" oldp="106331"></Card>
-              <Card img={redminote14} pname="Redmi Note 14 5G" pprice="Rs. 21999/-" discount="-12%" oldp="24999"></Card>
-              <Card img={vivov50} pname="Vivo V50 5G" pprice="Rs. 36999/-" discount="-14%" oldp="42999"></Card>
-              <Card img={hpvictus} pname="HP Victus" pprice="Rs. 60990/-" discount="-16%" oldp="72718"></Card>
-              <Card img={vivoy18t} pname="Vivo Y18t" pprice="Rs. 9499/-" discount="-32%" oldp="13999"></Card>
-              <Card img={boat} pname="boAt Rockerz 450" pprice="Rs. 1399/-" discount="-65%" oldp="3990"></Card>
-              <Card img={sgs24fe} pname="Samsung S24 FE" pprice="Rs. 59999/-" discount="-29%" oldp="59999"></Card>
-              <Card img={hp255} pname="HP Laptop 255" pprice="Rs. 24150/-" discount="-27%" oldp="32999"></Card>
-              <Card img={vivot3x} pname="Vivo T3X 5G" pprice="Rs. 13564/-" discount="-29%" oldp="18999"></Card>
-              <Card img={vivox200} pname="Vivo X200 Pro" pprice="Rs. 94999/-" discount="-7%" oldp="101999"></Card>
-              <Card img={redmia3x} pname="Redmi A3X" pprice="Rs. 7499/-" discount="-32%" oldp="10999"></Card>
+              <FilterCard>
+                <Card img={iphone15} pname="Iphone15" discount="-23%" pprice="Rs. 61499/-" oldp="79000"></Card>
+                <Card img={lenovothink} pname="Lenovo ThinkPad" pprice="Rs. 17538/-" discount="-65%" oldp="49999"></Card>
+                <Card img={jbl} pname="JBL Tune 510BT" pprice="Rs. 2799/-" discount="-37%" oldp="4449"></Card>
+                <Card img={dell3530} pname="Dell Inspiron 3530" pprice="Rs. 57490/-" discount="-21%" oldp="72598"></Card>
+                <Card img={redmi13} pname="Redmi 13 5G" pprice="Rs. 11973/-" discount="-33%" oldp="17999"></Card>
+                <Card img={dell5630} pname="Dell Insprion 5630" pprice="Rs. 64490/-" discount="-29%" oldp="90999"></Card>
+                <Card img={sgs23ul} pname="Samsung S23 Ultra" pprice="Rs. 71999/-" discount="-52%" oldp="149999"></Card>
+                <Card img={lenovov14} pname="Lenovo V14" pprice="Rs. 37168/-" discount="-26%" oldp="49990"></Card>
+                <Card img={redminote13} pname="Redmi Note 13 Pro" pprice="Rs. 18488/-" discount="-40%" oldp="30999"></Card>
+                <Card img={acernitro} pname="Acer Nitro V" pprice="Rs. 78999/-" discount="-24%" oldp="103999"></Card>
+                <Card img={boultx} pname="Boult X Mustang" pprice="Rs. 2499/-" discount="-64%" oldp="6999"></Card>
+                <Card img={hp15} pname="HP 15" pprice="Rs. 54990/-" discount="-23%" oldp="71773"></Card>
+                <Card img={iphone16} pname="Iphone16" discount="-9%" pprice="Rs. 72900/-" oldp="79000"></Card>
+                <Card img={dell3440} pname="Dell latitude 3440" pprice="Rs. 29990/-" discount="-27%" oldp="40999"></Card>
+                <Card img={aceralg} pname="Acer ALG" pprice="Rs. 61990/-" discount="-33%" oldp="92999"></Card>
+                <Card img={boultq} pname="Boult Q headphone" pprice="Rs. 1999/-" discount="-67%" oldp="5999"></Card>
+                <Card img={acerneo} pname="Acer Predator helios neo 16" pprice="Rs. 143999/-" discount="-9%" oldp="157999"></Card>
+                <Card img={sga23} pname="Samsung Galaxy A23" pprice="Rs. 28999/-" discount="-22%" oldp="36999"></Card>
+                <Card img={acerswift} pname="Acer Swift 9014" pprice="Rs. 51990/-" discount="-13%" oldp="59999"></Card>
+                <Card img={sgs25} pname="Samsung S25 5G" pprice="Rs. 80999/-"></Card>
+                <Card img={lenovoslim3} pname="Lenovo IdeaPad Slim 3" pprice="Rs. 64490/-" discount="-26%" oldp="86890"></Card>
+                <Card img={iphone13} pname="Iphone13" discount="-25%" pprice="Rs. 52499/-" oldp="69900"></Card>
+                <Card img={hp14} pname="HP Pavilion 14" pprice="Rs. 75990/-" discount="-22%" oldp="97867"></Card>
+                <Card img={iphone16max} pname="Iphone16 Pro Max" discount="-4%" pprice="Rs. 177900/-" oldp="184900"></Card>
+                <Card img={lenovoloq} pname="Lenovo LOQ" pprice="Rs. 65490/-" discount="-21%" oldp="82690"></Card>
+                <Card img={dellg15} pname="Dell G15" pprice="Rs. 78990/-" discount="-26%" oldp="106331"></Card>
+                <Card img={redminote14} pname="Redmi Note 14 5G" pprice="Rs. 21999/-" discount="-12%" oldp="24999"></Card>
+                <Card img={vivov50} pname="Vivo V50 5G" pprice="Rs. 36999/-" discount="-14%" oldp="42999"></Card>
+                <Card img={hpvictus} pname="HP Victus" pprice="Rs. 60990/-" discount="-16%" oldp="72718"></Card>
+                <Card img={vivoy18t} pname="Vivo Y18t" pprice="Rs. 9499/-" discount="-32%" oldp="13999"></Card>
+                <Card img={boat} pname="boAt Rockerz 450" pprice="Rs. 1399/-" discount="-65%" oldp="3990"></Card>
+                <Card img={sgs24fe} pname="Samsung S24 FE" pprice="Rs. 59999/-" discount="-29%" oldp="59999"></Card>
+                <Card img={hp255} pname="HP Laptop 255" pprice="Rs. 24150/-" discount="-27%" oldp="32999"></Card>
+                <Card img={vivot3x} pname="Vivo T3X 5G" pprice="Rs. 13564/-" discount="-29%" oldp="18999"></Card>
+                <Card img={vivox200} pname="Vivo X200 Pro" pprice="Rs. 94999/-" discount="-7%" oldp="101999"></Card>
+                <Card img={redmia3x} pname="Redmi A3X" pprice="Rs. 7499/-" discount="-32%" oldp="10999"></Card>
+              </FilterCard>
             </div>
           }></Route>
 
@@ -108,22 +121,24 @@ function App() {
                 <Categories title="Vivo" link="/vivo"> </Categories>
               </div>
               <div className='card-container'>
-                <Card img={iphone15} pname="Iphone15" discount="-23%" pprice="Rs. 61499/-" oldp="79000"></Card>
-                <Card img={redminote13} pname="Redmi Note 13 Pro" pprice="Rs. 18488/-" discount="-40%" oldp="30999"></Card>
-                <Card img={vivot3x} pname="Vivo T3X 5G" pprice="Rs. 13564/-" discount="-29%" oldp="18999"></Card>
-                <Card img={iphone16} pname="Iphone16" discount="-9%" pprice="Rs. 72900/-" oldp="79000"></Card>
-                <Card img={redminote14} pname="Redmi Note 14 5G" pprice="Rs. 21999/-" discount="-12%" oldp="24999"></Card>
-                <Card img={sgs23ul} pname="Samsung S23 Ultra" pprice="Rs. 71999/-" discount="-52%" oldp="149999"></Card>
-                <Card img={vivov50} pname="Vivo V50 5G" pprice="Rs. 36999/-" discount="-14%" oldp="42999"></Card>
-                <Card img={redmi13} pname="Redmi 13 5G" pprice="Rs. 11973/-" discount="-33%" oldp="17999"></Card>
-                <Card img={vivoy18t} pname="Vivo Y18t" pprice="Rs. 9499/-" discount="-32%" oldp="13999"></Card>
-                <Card img={iphone13} pname="Iphone13" discount="-25%" pprice="Rs. 52499/-" oldp="69900"></Card>
-                <Card img={sgs24fe} pname="Samsung S24 FE" pprice="Rs. 59999/-" discount="-29%" oldp="59999"></Card>
-                <Card img={vivox200} pname="Vivo X200 Pro" pprice="Rs. 94999/-" discount="-7%" oldp="101999"></Card>
-                <Card img={sga23} pname="Samsung Galaxy A23" pprice="Rs. 28999/-" discount="-22%" oldp="36999"></Card>
-                <Card img={redmia3x} pname="Redmi A3X" pprice="Rs. 7499/-" discount="-32%" oldp="10999"></Card>
-                <Card img={sgs25} pname="Samsung S25 5G" pprice="Rs. 80999/-"></Card>
-                <Card img={iphone16max} pname="Iphone16 Pro Max" discount="-4%" pprice="Rs. 177900/-" oldp="184900"></Card>
+                <FilterCard>
+                  <Card img={iphone15} pname="Iphone15" discount="-23%" pprice="Rs. 61499/-" oldp="79000"></Card>
+                  <Card img={redminote13} pname="Redmi Note 13 Pro" pprice="Rs. 18488/-" discount="-40%" oldp="30999"></Card>
+                  <Card img={vivot3x} pname="Vivo T3X 5G" pprice="Rs. 13564/-" discount="-29%" oldp="18999"></Card>
+                  <Card img={iphone16} pname="Iphone16" discount="-9%" pprice="Rs. 72900/-" oldp="79000"></Card>
+                  <Card img={redminote14} pname="Redmi Note 14 5G" pprice="Rs. 21999/-" discount="-12%" oldp="24999"></Card>
+                  <Card img={sgs23ul} pname="Samsung S23 Ultra" pprice="Rs. 71999/-" discount="-52%" oldp="149999"></Card>
+                  <Card img={vivov50} pname="Vivo V50 5G" pprice="Rs. 36999/-" discount="-14%" oldp="42999"></Card>
+                  <Card img={redmi13} pname="Redmi 13 5G" pprice="Rs. 11973/-" discount="-33%" oldp="17999"></Card>
+                  <Card img={vivoy18t} pname="Vivo Y18t" pprice="Rs. 9499/-" discount="-32%" oldp="13999"></Card>
+                  <Card img={iphone13} pname="Iphone13" discount="-25%" pprice="Rs. 52499/-" oldp="69900"></Card>
+                  <Card img={sgs24fe} pname="Samsung S24 FE" pprice="Rs. 59999/-" discount="-29%" oldp="59999"></Card>
+                  <Card img={vivox200} pname="Vivo X200 Pro" pprice="Rs. 94999/-" discount="-7%" oldp="101999"></Card>
+                  <Card img={sga23} pname="Samsung Galaxy A23" pprice="Rs. 28999/-" discount="-22%" oldp="36999"></Card>
+                  <Card img={redmia3x} pname="Redmi A3X" pprice="Rs. 7499/-" discount="-32%" oldp="10999"></Card>
+                  <Card img={sgs25} pname="Samsung S25 5G" pprice="Rs. 80999/-"></Card>
+                  <Card img={iphone16max} pname="Iphone16 Pro Max" discount="-4%" pprice="Rs. 177900/-" oldp="184900"></Card>
+                </FilterCard>
               </div>
             </>
           }></Route>
@@ -138,10 +153,12 @@ function App() {
                 <Categories title="Vivo" link="/vivo"> </Categories>
               </div>
               <div className='card-container'>
-                <Card img={iphone15} pname="Iphone15" discount="-23%" pprice="Rs. 61499/-" oldp="79000"></Card>
-                <Card img={iphone16} pname="Iphone16" discount="-9%" pprice="Rs. 72900/-" oldp="79000"></Card>
-                <Card img={iphone13} pname="Iphone13" discount="-25%" pprice="Rs. 52499/-" oldp="69900"></Card>
-                <Card img={iphone16max} pname="Iphone16 Pro Max" discount="-4%" pprice="Rs. 177900/-" oldp="184900"></Card>
+                <FilterCard>
+                  <Card img={iphone15} pname="Iphone15" discount="-23%" pprice="Rs. 61499/-" oldp="79000"></Card>
+                  <Card img={iphone16} pname="Iphone16" discount="-9%" pprice="Rs. 72900/-" oldp="79000"></Card>
+                  <Card img={iphone13} pname="Iphone13" discount="-25%" pprice="Rs. 52499/-" oldp="69900"></Card>
+                  <Card img={iphone16max} pname="Iphone16 Pro Max" discount="-4%" pprice="Rs. 177900/-" oldp="184900"></Card>
+                </FilterCard>
               </div>
             </>
           }></Route>
@@ -156,10 +173,12 @@ function App() {
                 <Categories title="Vivo" link="/vivo"> </Categories>
               </div>
               <div className='card-container'>
-                <Card img={sgs23ul} pname="Samsung S23 Ultra" pprice="Rs. 71999/-" discount="-52%" oldp="149999"></Card>
-                <Card img={sga23} pname="Samsung Galaxy A23" pprice="Rs. 28999/-" discount="-22%" oldp="36999"></Card>
-                <Card img={sgs24fe} pname="Samsung S24 FE" pprice="Rs. 59999/-" discount="-29%" oldp="59999"></Card>
-                <Card img={sgs25} pname="Samsung S25 5G" pprice="Rs. 80999/-"></Card>
+                <FilterCard>
+                  <Card img={sgs23ul} pname="Samsung S23 Ultra" pprice="Rs. 71999/-" discount="-52%" oldp="149999"></Card>
+                  <Card img={sga23} pname="Samsung Galaxy A23" pprice="Rs. 28999/-" discount="-22%" oldp="36999"></Card>
+                  <Card img={sgs24fe} pname="Samsung S24 FE" pprice="Rs. 59999/-" discount="-29%" oldp="59999"></Card>
+                  <Card img={sgs25} pname="Samsung S25 5G" pprice="Rs. 80999/-"></Card>
+                </FilterCard>
               </div>
             </>
           }></Route>
@@ -174,10 +193,12 @@ function App() {
                 <Categories title="Vivo" link="/vivo"> </Categories>
               </div>
               <div className='card-container'>
-                <Card img={redmi13} pname="Redmi 13 5G" pprice="Rs. 11973/-" discount="-33%" oldp="17999"></Card>
-                <Card img={redminote13} pname="Redmi Note 13 Pro" pprice="Rs. 18488/-" discount="-40%" oldp="30999"></Card>
-                <Card img={redminote14} pname="Redmi Note 14 5G" pprice="Rs. 21999/-" discount="-12%" oldp="24999"></Card>
-                <Card img={redmia3x} pname="Redmi A3X" pprice="Rs. 7499/-" discount="-32%" oldp="10999"></Card>
+                <FilterCard>
+                  <Card img={redmi13} pname="Redmi 13 5G" pprice="Rs. 11973/-" discount="-33%" oldp="17999"></Card>
+                  <Card img={redminote13} pname="Redmi Note 13 Pro" pprice="Rs. 18488/-" discount="-40%" oldp="30999"></Card>
+                  <Card img={redminote14} pname="Redmi Note 14 5G" pprice="Rs. 21999/-" discount="-12%" oldp="24999"></Card>
+                  <Card img={redmia3x} pname="Redmi A3X" pprice="Rs. 7499/-" discount="-32%" oldp="10999"></Card>
+                </FilterCard>
               </div>
             </>
           }></Route>
@@ -192,10 +213,12 @@ function App() {
                 <Categories title="Vivo" link="/vivo"> </Categories>
               </div>
               <div className='card-container'>
-                <Card img={vivot3x} pname="Vivo T3X 5G" pprice="Rs. 13564/-" discount="-29%" oldp="18999"></Card>
-                <Card img={vivov50} pname="Vivo V50 5G" pprice="Rs. 36999/-" discount="-14%" oldp="42999"></Card>
-                <Card img={vivoy18t} pname="Vivo Y18t" pprice="Rs. 9499/-" discount="-32%" oldp="13999"></Card>
-                <Card img={vivox200} pname="Vivo X200 Pro" pprice="Rs. 94999/-" discount="-7%" oldp="101999"></Card>
+                <FilterCard>
+                  <Card img={vivot3x} pname="Vivo T3X 5G" pprice="Rs. 13564/-" discount="-29%" oldp="18999"></Card>
+                  <Card img={vivov50} pname="Vivo V50 5G" pprice="Rs. 36999/-" discount="-14%" oldp="42999"></Card>
+                  <Card img={vivoy18t} pname="Vivo Y18t" pprice="Rs. 9499/-" discount="-32%" oldp="13999"></Card>
+                  <Card img={vivox200} pname="Vivo X200 Pro" pprice="Rs. 94999/-" discount="-7%" oldp="101999"></Card>
+                </FilterCard>
               </div>
             </>
           }></Route>
@@ -210,22 +233,24 @@ function App() {
                 <Categories title="Acer" link="/acer"> </Categories>
               </div>
               <div className='card-container'>
-                <Card img={lenovov14} pname="Lenovo V14" pprice="Rs. 37168/-" discount="-26%" oldp="49990"></Card>
-                <Card img={hp14} pname="HP Pavilion 14" pprice="Rs. 75990/-" discount="-22%" oldp="97867"></Card>
-                <Card img={acerneo} pname="Acer Predator helios neo 16" pprice="Rs. 143999/-" discount="-9%" oldp="157999"></Card>
-                <Card img={dell3530} pname="Dell Inspiron 3530" pprice="Rs. 57490/-" discount="-21%" oldp="72598"></Card>
-                <Card img={lenovoloq} pname="Lenovo LOQ" pprice="Rs. 65490/-" discount="-21%" oldp="82690"></Card>
-                <Card img={hp15} pname="HP 15" pprice="Rs. 54990/-" discount="-23%" oldp="71773"></Card>
-                <Card img={dellg15} pname="Dell G15" pprice="Rs. 78990/-" discount="-26%" oldp="106331"></Card>
-                <Card img={hp255} pname="HP Laptop 255" pprice="Rs. 24150/-" discount="-27%" oldp="32999"></Card>
-                <Card img={dell5630} pname="Dell Insprion 5630" pprice="Rs. 64490/-" discount="-29%" oldp="90999"></Card>
-                <Card img={dell3440} pname="Dell latitude 3440" pprice="Rs. 29990/-" discount="-27%" oldp="40999"></Card>
-                <Card img={lenovoslim3} pname="Lenovo IdeaPad Slim 3" pprice="Rs. 64490/-" discount="-26%" oldp="86890"></Card>
-                <Card img={acerswift} pname="Acer Swift 9014" pprice="Rs. 51990/-" discount="-13%" oldp="59999"></Card>
-                <Card img={hpvictus} pname="HP Victus" pprice="Rs. 60990/-" discount="-16%" oldp="72718"></Card>
-                <Card img={aceralg} pname="Acer ALG" pprice="Rs. 61990/-" discount="-33%" oldp="92999"></Card>
-                <Card img={acernitro} pname="Acer Nitro V" pprice="Rs. 78999/-" discount="-24%" oldp="103999"></Card>
-                <Card img={lenovothink} pname="Lenovo ThinkPad" pprice="Rs. 17538/-" discount="-65%" oldp="49999"></Card>
+                <FilterCard>
+                  <Card img={lenovov14} pname="Lenovo V14" pprice="Rs. 37168/-" discount="-26%" oldp="49990"></Card>
+                  <Card img={hp14} pname="HP Pavilion 14" pprice="Rs. 75990/-" discount="-22%" oldp="97867"></Card>
+                  <Card img={acerneo} pname="Acer Predator helios neo 16" pprice="Rs. 143999/-" discount="-9%" oldp="157999"></Card>
+                  <Card img={dell3530} pname="Dell Inspiron 3530" pprice="Rs. 57490/-" discount="-21%" oldp="72598"></Card>
+                  <Card img={lenovoloq} pname="Lenovo LOQ" pprice="Rs. 65490/-" discount="-21%" oldp="82690"></Card>
+                  <Card img={hp15} pname="HP 15" pprice="Rs. 54990/-" discount="-23%" oldp="71773"></Card>
+                  <Card img={dellg15} pname="Dell G15" pprice="Rs. 78990/-" discount="-26%" oldp="106331"></Card>
+                  <Card img={hp255} pname="HP Laptop 255" pprice="Rs. 24150/-" discount="-27%" oldp="32999"></Card>
+                  <Card img={dell5630} pname="Dell Insprion 5630" pprice="Rs. 64490/-" discount="-29%" oldp="90999"></Card>
+                  <Card img={dell3440} pname="Dell latitude 3440" pprice="Rs. 29990/-" discount="-27%" oldp="40999"></Card>
+                  <Card img={lenovoslim3} pname="Lenovo IdeaPad Slim 3" pprice="Rs. 64490/-" discount="-26%" oldp="86890"></Card>
+                  <Card img={acerswift} pname="Acer Swift 9014" pprice="Rs. 51990/-" discount="-13%" oldp="59999"></Card>
+                  <Card img={hpvictus} pname="HP Victus" pprice="Rs. 60990/-" discount="-16%" oldp="72718"></Card>
+                  <Card img={aceralg} pname="Acer ALG" pprice="Rs. 61990/-" discount="-33%" oldp="92999"></Card>
+                  <Card img={acernitro} pname="Acer Nitro V" pprice="Rs. 78999/-" discount="-24%" oldp="103999"></Card>
+                  <Card img={lenovothink} pname="Lenovo ThinkPad" pprice="Rs. 17538/-" discount="-65%" oldp="49999"></Card>
+                </FilterCard>
               </div>
             </>
           }></Route>
@@ -240,10 +265,12 @@ function App() {
                 <Categories title="Acer" link="/acer"> </Categories>
               </div>
               <div className='card-container'>
-                <Card img={lenovothink} pname="Lenovo ThinkPad" pprice="Rs. 17538/-" discount="-65%" oldp="49999"></Card>
-                <Card img={lenovov14} pname="Lenovo V14" pprice="Rs. 37168/-" discount="-26%" oldp="49990"></Card>
-                <Card img={lenovoslim3} pname="Lenovo IdeaPad Slim 3" pprice="Rs. 64490/-" discount="-26%" oldp="86890"></Card>
-                <Card img={lenovoloq} pname="Lenovo LOQ" pprice="Rs. 65490/-" discount="-21%" oldp="82690"></Card>
+                <FilterCard>
+                  <Card img={lenovothink} pname="Lenovo ThinkPad" pprice="Rs. 17538/-" discount="-65%" oldp="49999"></Card>
+                  <Card img={lenovov14} pname="Lenovo V14" pprice="Rs. 37168/-" discount="-26%" oldp="49990"></Card>
+                  <Card img={lenovoslim3} pname="Lenovo IdeaPad Slim 3" pprice="Rs. 64490/-" discount="-26%" oldp="86890"></Card>
+                  <Card img={lenovoloq} pname="Lenovo LOQ" pprice="Rs. 65490/-" discount="-21%" oldp="82690"></Card>
+                </FilterCard>
               </div>
             </>
           }></Route>
@@ -258,10 +285,12 @@ function App() {
                 <Categories title="Acer" link="/acer"> </Categories>
               </div>
               <div className='card-container'>
-                <Card img={hp15} pname="HP 15" pprice="Rs. 54990/-" discount="-23%" oldp="71773"></Card>
-                <Card img={hp255} pname="HP Laptop 255" pprice="Rs. 24150/-" discount="-27%" oldp="32999"></Card>
-                <Card img={hpvictus} pname="HP Victus" pprice="Rs. 60990/-" discount="-16%" oldp="72718"></Card>
-                <Card img={hp14} pname="HP Pavilion 14" pprice="Rs. 75990/-" discount="-22%" oldp="97867"></Card>
+                <FilterCard>
+                  <Card img={hp15} pname="HP 15" pprice="Rs. 54990/-" discount="-23%" oldp="71773"></Card>
+                  <Card img={hp255} pname="HP Laptop 255" pprice="Rs. 24150/-" discount="-27%" oldp="32999"></Card>
+                  <Card img={hpvictus} pname="HP Victus" pprice="Rs. 60990/-" discount="-16%" oldp="72718"></Card>
+                  <Card img={hp14} pname="HP Pavilion 14" pprice="Rs. 75990/-" discount="-22%" oldp="97867"></Card>
+                </FilterCard>
               </div>
             </>
           }></Route>
@@ -276,10 +305,12 @@ function App() {
                 <Categories title="Acer" link="/acer"> </Categories>
               </div>
               <div className='card-container'>
-                <Card img={dellg15} pname="Dell G15" pprice="Rs. 78990/-" discount="-26%" oldp="106331"></Card>
-                <Card img={dell3530} pname="Dell Inspiron 3530" pprice="Rs. 57490/-" discount="-21%" oldp="72598"></Card>
-                <Card img={dell5630} pname="Dell Insprion 5630" pprice="Rs. 64490/-" discount="-29%" oldp="90999"></Card>
-                <Card img={dell3440} pname="Dell latitude 3440" pprice="Rs. 29990/-" discount="-27%" oldp="40999"></Card>
+                <FilterCard>
+                  <Card img={dellg15} pname="Dell G15" pprice="Rs. 78990/-" discount="-26%" oldp="106331"></Card>
+                  <Card img={dell3530} pname="Dell Inspiron 3530" pprice="Rs. 57490/-" discount="-21%" oldp="72598"></Card>
+                  <Card img={dell5630} pname="Dell Insprion 5630" pprice="Rs. 64490/-" discount="-29%" oldp="90999"></Card>
+                  <Card img={dell3440} pname="Dell latitude 3440" pprice="Rs. 29990/-" discount="-27%" oldp="40999"></Card>
+                </FilterCard>
               </div>
             </>
           }></Route>
@@ -294,20 +325,24 @@ function App() {
                 <Categories title="Acer" link="/acer"> </Categories>
               </div>
               <div className='card-container'>
-                <Card img={acernitro} pname="Acer Nitro V" pprice="Rs. 78999/-" discount="-24%" oldp="103999"></Card>
-                <Card img={aceralg} pname="Acer ALG" pprice="Rs. 61990/-" discount="-33%" oldp="92999"></Card>
-                <Card img={acerneo} pname="Acer Predator helios neo 16" pprice="Rs. 143999/-" discount="-9%" oldp="157999"></Card>
-                <Card img={acerswift} pname="Acer Swift 9014" pprice="Rs. 51990/-" discount="-13%" oldp="59999"></Card>
+                <FilterCard>
+                  <Card img={acernitro} pname="Acer Nitro V" pprice="Rs. 78999/-" discount="-24%" oldp="103999"></Card>
+                  <Card img={aceralg} pname="Acer ALG" pprice="Rs. 61990/-" discount="-33%" oldp="92999"></Card>
+                  <Card img={acerneo} pname="Acer Predator helios neo 16" pprice="Rs. 143999/-" discount="-9%" oldp="157999"></Card>
+                  <Card img={acerswift} pname="Acer Swift 9014" pprice="Rs. 51990/-" discount="-13%" oldp="59999"></Card>
+                </FilterCard>
               </div>
             </>
           }></Route>
 
           <Route path='/headphones' element={
             <div className='card-container'>
-              <Card img={jbl} pname="JBL Tune 510BT" pprice="Rs. 2799/-" discount="-37%" oldp="4449"></Card>
-              <Card img={boat} pname="boAt Rockerz 450" pprice="Rs. 1399/-" discount="-65%" oldp="3990"></Card>
-              <Card img={boultq} pname="Boult Q headphone" pprice="Rs. 1999/-" discount="-67%" oldp="5999"></Card>
-              <Card img={boultx} pname="Boult X Mustang" pprice="Rs. 2499/-" discount="-64%" oldp="6999"></Card>
+              <FilterCard>
+                <Card img={jbl} pname="JBL Tune 510BT" pprice="Rs. 2799/-" discount="-37%" oldp="4449"></Card>
+                <Card img={boat} pname="boAt Rockerz 450" pprice="Rs. 1399/-" discount="-65%" oldp="3990"></Card>
+                <Card img={boultq} pname="Boult Q headphone" pprice="Rs. 1999/-" discount="-67%" oldp="5999"></Card>
+                <Card img={boultx} pname="Boult X Mustang" pprice="Rs. 2499/-" discount="-64%" oldp="6999"></Card>
+              </FilterCard>
             </div>
           }></Route>
 

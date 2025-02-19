@@ -4,16 +4,17 @@ import { BsSearch } from "react-icons/bs";
 import { VscColorMode } from "react-icons/vsc";
 import { FiShoppingBag } from "react-icons/fi";
 
-function Navbar() {
+function Navbar({ searchQuery, onSearchChange}) {
     return (
         <div className="nav">
             <div className='nav-icon'>
                 <TiShoppingCart />
             </div>
             <b>Shopio</b>
-            <form className='search'>
-                <input type='text' placeholder='Search Shopio..' id='search-box' />
-                <BsSearch id='search-icon' />
+            <form className='search' onSubmit={(e)=>e.preventDefault()}>
+            {/* <BsSearch id='search-icon'/> */}
+                <input type='text' placeholder='Search Shopio..' id='search-box' value={searchQuery} onChange={(e)=>onSearchChange(e.target.value)}/>
+                <BsSearch id='search-icon'/>
             </form>
 
             <div className='login'>
