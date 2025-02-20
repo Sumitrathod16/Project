@@ -1,4 +1,4 @@
-.cbox{
+.cbox {
     background-color: white;
     height: 50px;
     padding: 8px;
@@ -12,12 +12,12 @@
     transition: box-shadow 0.3s, transform 0.3s;
 }
 
-.cbox:hover{
+.cbox:hover {
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.7);
     transform: scale(1.03);
 }
 
-.cname{
+.cname {
     background-color: white;
     padding: 5px;
     font-weight: bold;
