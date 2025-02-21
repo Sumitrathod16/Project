@@ -29,15 +29,21 @@ function Navbar({ searchQuery, onSearchChange, dark, setDark, sidecart, setsidec
                 <FiShoppingBag />
                 <span>0</span>
             </div>
-            <div className='siderbar' onClick={()=>{setsidebar(true)}}>
+            <div className='siderbar' onClick={() => { setsidebar(true) }}>
                 <VscThreeBars id='sidebar-icon' />
             </div>
             <div className={`s ${sidecart ? 'cart-container' : ''}`}>
                 <p className='incart-title'>Order items</p>
                 <TfiClose className='cartbar-close' onClick={() => { setsidecart(false) }} />
             </div>
-            <div className={`s ${sidebar ? 'cart-container' : ''}`}>
-                <TfiClose className='cartbar-close' onClick={() => { setsidebar(false) }} />
+            <div className={`s s1 ${sidebar ? 'cart-container' : ''}`}>
+                <TfiClose className='sidebar-cross' onClick={() => { setsidebar(false) }} />
+                <ul className='sidebar-content'>
+                    <li>Login</li>
+                    <li>Signup</li>
+                    <li onClick={() => { setDark(dark = !dark) }}><VscColorMode /></li>
+                    <li onClick={() => { setsidecart(true) }}><FiShoppingBag /> <span id='zero'>0</span></li>
+                </ul>
             </div>
         </div>
     );
