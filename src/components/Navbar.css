@@ -214,6 +214,7 @@ span {
     right: 0;
     background-color: white;
     display: flex;
+    flex-direction: column;
 }
 
 .incart-title {
@@ -221,16 +222,29 @@ span {
     margin: 10px;
     display: flex;
     justify-content: center;
+    font-size: large;
+    padding-left: 30px;
+    font-weight: 600;
 }
 
 .cartbar-close {
     width: 10%;
-    margin-top: 15px;
-    margin-left: 10px;
+    height: 40px;
     display: flex;
     justify-content: flex-end;
     cursor: pointer;
+    padding: 5px;
+    margin-left: 5px;
+    
 }
+
+.cart-item{
+    width: 100%;
+    height: 100vh;
+    margin-top: 10px;
+    padding: 5px;
+}
+
 .sidebar-cross{
     margin: 15px;
 }
@@ -269,4 +283,9 @@ li:hover{
     position: absolute;
     left: 53%;
     font-size: 10px;
+}
+
+#defmsg{
+    margin-top: 100px;
+    margin-right: 90px;
 }

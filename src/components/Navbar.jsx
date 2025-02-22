@@ -5,8 +5,17 @@ import { VscColorMode } from "react-icons/vsc";
 import { FiShoppingBag } from "react-icons/fi";
 import { VscThreeBars } from "react-icons/vsc";
 import { TfiClose } from "react-icons/tfi";
+import { useContext } from 'react';
+import { datacontext } from '../context/UserContext';
+import Cart from './Cart';
 
 function Navbar({ searchQuery, onSearchChange, dark, setDark, sidecart, setsidecart, sidebar, setsidebar }) {
+    let { cnt,clicked } = useContext(datacontext);
+    let msg = null;
+    if(!clicked){
+        msg ="Empty Cart..";
+    }
+
     return (
         <div className={`nav ${dark ? 'dark-theme' : ''}`}>
             <div className='nav-icon'>
@@ -27,14 +36,18 @@ function Navbar({ searchQuery, onSearchChange, dark, setDark, sidecart, setsidec
             </div>
             <div className='cart-icon' onClick={() => { setsidecart(true) }}>
                 <FiShoppingBag />
-                <span>0</span>
+                <span>{cnt}</span>
             </div>
             <div className='siderbar' onClick={() => { setsidebar(true) }}>
                 <VscThreeBars id='sidebar-icon' />
             </div>
             <div className={`s ${sidecart ? 'cart-container' : ''}`}>
-                <p className='incart-title'>Order items</p>
-                <TfiClose className='cartbar-close' onClick={() => { setsidecart(false) }} />
+                <span className='incart-title'>Order items</span>
+                <TfiClose className='cartbar-close' onClick={() => { setsidecart(false) }} /> 
+                <span id='defmsg'>{msg}</span>
+                <div className='cart-item'>
+                    <Cart />
+                </div>
             </div>
             <div className={`s s1 ${sidebar ? 'cart-container' : ''}`}>
                 <TfiClose className='sidebar-cross' onClick={() => { setsidebar(false) }} />
@@ -42,7 +55,7 @@ function Navbar({ searchQuery, onSearchChange, dark, setDark, sidecart, setsidec
                     <li>Login</li>
                     <li>Signup</li>
                     <li onClick={() => { setDark(dark = !dark) }}><VscColorMode /></li>
-                    <li onClick={() => { setsidecart(true) }}><FiShoppingBag /> <span id='zero'>0</span></li>
+                    <li onClick={() => { setsidecart(true) }}><FiShoppingBag /> <span id='zero'>{cnt}</span></li>
                 </ul>
             </div>
         </div>
