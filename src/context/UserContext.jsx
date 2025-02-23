@@ -6,8 +6,14 @@ function UserContext({children}){
     const [added,setadded] = useState(false);
     const [cnt,setcnt] = useState(0);
     const [clicked,setclicked] = useState(false);
-    const [image,setimage] = useState(null);
-    const [price,setprice] = useState(null);
+    const[cartItems,setcartItems] = useState([]);
+
+    function addtocart(img,price,name){
+        setcartItems((prev)=>[...prev,{img,price,name}]);
+        setadded(true);
+        setcnt(cnt+1);
+        setclicked(true);
+    }
 
     const value = {
         added,
@@ -16,10 +22,9 @@ function UserContext({children}){
         setcnt,
         clicked,
         setclicked,
-        image,
-        setimage,
-        price,
-        setprice
+        cartItems,
+        setcartItems,
+        addtocart
     }
 
     return (

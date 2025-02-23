@@ -215,6 +215,7 @@ span {
     background-color: white;
     display: flex;
     flex-direction: column;
+    overflow: auto;
 }
 
 .incart-title {
@@ -234,8 +235,8 @@ span {
     justify-content: flex-end;
     cursor: pointer;
     padding: 5px;
+    position: absolute;
     margin-left: 5px;
-    
 }
 
 .cart-item{

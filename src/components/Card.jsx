@@ -3,11 +3,8 @@ import './Card.css';
 import { datacontext } from '../context/UserContext';
 
 function Card(props) {
-    let {cnt,setcnt,setadded,setclicked,setimage,setprice} = useContext(datacontext);
-    let count = ()=>{
-        setcnt(cnt+1);
-    }
-
+    let {addtocart} = useContext(datacontext);
+    
     return (
         <div className="card">
             <img src={props.img} alt="" />
@@ -16,7 +13,7 @@ function Card(props) {
             <p id='product-price'>{props.pprice}
                 <strike id="old-price">{props.oldp}</strike>
             </p>
-            <button id='add-to-cart-btn' onClick={()=>{setadded(true); count(); setclicked(true); setimage(props.img); setprice(props.pprice);}}>Add to cart</button>
+            <button id='add-to-cart-btn' onClick={()=>{ addtocart(props.img,props.pprice,props.pname)}}>Add to cart</button>
         </div>
     );
 }
